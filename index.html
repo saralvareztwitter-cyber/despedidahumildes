@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Index Input</title>
+</head>
+<body>
+    <h1>Input Your Index</h1>
+    <input type="number" id="indexInput" placeholder="Enter an index" />
+    <button id="displayButton">Display Content</button>
+    <div id="contentArea"></div>
+
+    <script>
+        const contentMap = {
+            1: 'Content for index 1',
+            2: 'Content for index 2',
+            3: 'Content for index 3',
+            // add more indexed content here
+        };
+
+        document.getElementById('displayButton').onclick = function() {
+            const index = document.getElementById('indexInput').value;
+            const content = contentMap[index] || 'Content not available.';
+            document.getElementById('contentArea').innerHTML = `<p>${content}</p>`;
+        };
+    </script>
+</body>
+</html>
