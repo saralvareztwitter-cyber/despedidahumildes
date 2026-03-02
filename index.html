@@ -1,29 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Index Input</title>
+<meta charset="UTF-8">
+<title>🥃Deuda de chupitos 🥃</title>
+<h1>🥃 Bienvenida Sari Martini </br> a tu HIPOTECA oficial de chupitos 🥃</h1>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ca7db9, #dd2476);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px #000;
+}
+
+#shots {
+    font-size: 4em;
+    margin-bottom: 30px;
+}
+
+.countdown-container {
+    background: rgba(0,0,0,0.3);
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 250px;
+    margin: 20px auto;
+    font-size: 2.5em;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+.rules {
+    background: rgba(0,0,0,0.3);
+    padding: 30px 100px;
+    border-radius: 15px;
+    max-width: 400px;
+    font-size: 1.1em;
+    line-height: 1.5em;
+    text-align: left;
+}
+</style>
 </head>
-<body>
-    <h1>Input Your Index</h1>
-    <input type="number" id="indexInput" placeholder="Enter an index" />
-    <button id="displayButton">Display Content</button>
-    <div id="contentArea"></div>
 
-    <script>
-        const contentMap = {
-            1: 'Content for index 1',
-            2: 'Content for index 2',
-            3: 'Content for index 3',
-            // add more indexed content here
-        };
+<!-- Contador principal de chupitos -->
+<div id="shots">🥃 0</div>
 
-        document.getElementById('displayButton').onclick = function() {
-            const index = document.getElementById('indexInput').value;
-            const content = contentMap[index] || 'Content not available.';
-            document.getElementById('contentArea').innerHTML = `<p>${content}</p>`;
-        };
-    </script>
+<!-- Recuadro del contador en directo (fecha objetivo) -->
+<div class="countdown-container">
+    <div id="live-shots">00:00:00</div>
+</div>
+
+<script>
+// ------------------------------
+// CONTADOR DE CHUPITOS
+// ------------------------------
+let chupitos = 0;
+
+function actualizarContadores() {
+    document.getElementById("shots").textContent = "Deuda actual 🥃" + chupitos;
+    
+}
+actualizarContadores();
+
+// Ejemplo: aumenta 1 chupito cada hora
+let tiempoPenalizacion = 60 * 60 * 1000; // 1 hora
+setInterval(() => {
+    chupitos += 1;
+    actualizarContadores();
+}, tiempoPenalizacion);
+
+// ------------------------------
+// CONTADOR EN DIRECTO (tipo countdown de onlinealarmkur)
+// ------------------------------
+
+// Fecha objetivo del countdown
+let fechaObjetivo = new Date("2026-03-02T20:59:59+01:00"); // Ajusta la fecha según necesites
+
+function actualizarCountdown() {
+    let ahora = new Date();
+    let diff = fechaObjetivo - ahora;
+
+    if(diff < 0) diff = 0;
+
+    let horas = Math.floor(diff / (1000 * 60 * 60));
+    let minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    let segundos = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById("live-shots").textContent =
+        `${horas.toString().padStart(2,'0')}:${minutos.toString().padStart(2,'0')}:${segundos.toString().padStart(2,'0')}`;
+}
+
+// Actualiza cada segundo
+setInterval(actualizarCountdown, 1000);
+actualizarCountdown();
+</script>
+
+
+<div class="rules">
+    <strong>NORMAS</strong>
+    <ul>
+        <li>Estamos en pausa vale??? que a Dani no le da la cabeza para pensar tantas pruebas</li>
+        <li>Debes completar los retos dentro del tiempo indicado.</li>
+        <li>Si no completas los retos en el tiempo límite, el contador de chupitos aumentará automáticamente. Será en proporción de cuanto tardes en entregarlo.</li>
+        <li>El objetivo es mantener tu saldo de chupitos lo más bajo posible. 🍀</li>
+        <li>Andrea debe 3 chupitos por pancha</li>
+    </ul>
+</div>
+
 </body>
 </html>
