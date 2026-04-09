@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>🥃Deuda de chupitos 🥃</title>
-
 <h1>🥃 Bienvenida Sari Martini </br> a tu HIPOTECA oficial de chupitos 🥃</h1>
-
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -15,6 +13,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
     margin: 0;
     text-align: center;
 }
@@ -41,69 +40,24 @@ h1 {
     box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
-.rules, .checklist {
+.rules {
     background: rgba(0,0,0,0.3);
-    padding: 20px 40px;
+    padding: 30px 100px;
     border-radius: 15px;
     max-width: 400px;
     font-size: 1.1em;
     line-height: 1.5em;
     text-align: left;
-    margin-top: 20px;
-}
-
-.checklist h2 {
-    text-align: center;
-}
-
-label {
-    display: block;
-    margin: 5px 0;
 }
 </style>
 </head>
 
-<body>
-
+<!-- Contador principal de chupitos -->
 <div id="shots">🥃 0</div>
 
+<!-- Recuadro del contador en directo (fecha objetivo) -->
 <div class="countdown-container">
     <div id="live-shots">00:00:00</div>
-</div>
-
-<!-- CHECKLIST -->
-<div class="checklist">
-    <strong>HAZTE CON TODOS: BUSCA LOS SIGUIENTES POKEMONS POR LA FINCA</strong>
-    <br>
-    <strong>Pokémon</strong>
-    <label><input type="checkbox" class="check"> Pikachu</label>
-    <label><input type="checkbox" class="check"> Charmander</label>
-    <label><input type="checkbox" class="check"> Bulbasur</label>
-    <label><input type="checkbox" class="check"> Squirtle</label>
-
-    <br>
-
-    <strong>AVADA KEDABRA CHUPITO DE CABRA: BUSCA A LOS SIGUIENTES INTEGRANTES DE HARRY POTTER POR LA FINCA</strong>
-    <br>
-    <label><input type="checkbox" class="check"> Harry cabezon</label>
-    <label><input type="checkbox" class="check"> Ron</label>
-    <label><input type="checkbox" class="check"> Hermione</label>
-    <label><input type="checkbox" class="check"> Dumbledore</label>
-    <label><input type="checkbox" class="check"> Cedric (Edward)</label>
-    <label><input type="checkbox" class="check"> Jinny</label>
-    <label><input type="checkbox" class="check"> Harry dorado</label>
-</div>
-
-<div class="rules">
-    <strong>NORMAS</strong>
-    <ul>
-        <li>La putisima paella colega</li>
-        <li>Dani debe 7 chupitos</li>
-        <li>Sonia debe 3 chupitos y 10 sentadillas</li>
-        <li>Irene debe 1 nestea</li>
-        <li>Debes completar los retos dentro del tiempo indicado.</li>
-        <li>O espabilas o cuando se acabe el contador +5</li>        
-    </ul>
 </div>
 
 <script>
@@ -111,44 +65,26 @@ label {
 // CONTADOR DE CHUPITOS
 // ------------------------------
 let chupitos = 5;
-let intervaloChupitos;
 
 function actualizarContadores() {
-    document.getElementById("shots").textContent = "Deuda actual 🥃 " + chupitos;
+    document.getElementById("shots").textContent = "Deuda actual 🥃" + chupitos;
+    
 }
-
-function iniciarContador() {
-    intervaloChupitos = setInterval(() => {
-        chupitos += 1;
-        actualizarContadores();
-    }, 60 * 60 * 1000); // 1 hora
-}
-
 actualizarContadores();
-iniciarContador();
+
+// Ejemplo: aumenta 1 chupito cada hora
+let tiempoPenalizacion = 60 * 60 * 1000; // 1 hora
+setInterval(() => {
+    chupitos += 1;
+    actualizarContadores();
+}, tiempoPenalizacion);
 
 // ------------------------------
-// CHECKBOX LOGICA
+// CONTADOR EN DIRECTO (tipo countdown de onlinealarmkur)
 // ------------------------------
-const checks = document.querySelectorAll(".check");
 
-checks.forEach(check => {
-    check.addEventListener("change", verificarChecklist);
-});
-
-function verificarChecklist() {
-    const todosMarcados = Array.from(checks).every(c => c.checked);
-
-    if (todosMarcados) {
-        clearInterval(intervaloChupitos);
-        alert("🔥 HAS COMPLETADO TODO 🔥\nSe detiene la deuda de chupitos");
-    }
-}
-
-// ------------------------------
-// COUNTDOWN
-// ------------------------------
-let fechaObjetivo = new Date("2026-04-02T17:29:59+01:00");
+// Fecha objetivo del countdown
+let fechaObjetivo = new Date("2026-04-10T19:45:59+01:00"); // Ajusta la fecha según necesites
 
 function actualizarCountdown() {
     let ahora = new Date();
@@ -164,10 +100,29 @@ function actualizarCountdown() {
         `${horas.toString().padStart(2,'0')}:${minutos.toString().padStart(2,'0')}:${segundos.toString().padStart(2,'0')}`;
 }
 
+// Actualiza cada segundo
 setInterval(actualizarCountdown, 1000);
 actualizarCountdown();
-
 </script>
+
+
+<div class="rules">
+    <strong>NORMAS</strong>
+    <ul>
+        <li>La paella de secreto shh</li>
+        <li>Sergio: 2</li>
+        <li>Sara: 100</li>
+        <li>Andrea: 2</li>
+        <li>Maria: 0</li>        
+        <li>Paloma: 2</li>
+        <li>Sonia: 2</li>        
+        <li>Laura Porras: 0</li>
+        <li>Daniel: 2</li>
+        <li>Irene: -20</li>
+        <li>Debes completar los retos dentro del tiempo indicado.</li>
+        <li>O espabilas o cuando se acabe el contador +5, aqui solo descansan  los debiles</li>        
+    </ul>
+</div>
 
 </body>
 </html>
